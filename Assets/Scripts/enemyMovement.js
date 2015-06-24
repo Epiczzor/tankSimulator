@@ -27,6 +27,8 @@ public var searchClicks : int = 100;
 private var searchEnemy : boolean = false;
 private var foundEnemy : boolean = false;
 private var enemyGO : GameObject;
+private var disabled : boolean = false;
+
 
 function Start () {
 scanForEnemy();
@@ -35,7 +37,7 @@ scanForEnemy();
 function Update () {
 
 	
-	if(searchEnemy)
+	if(searchEnemy && !disabled)
 	{
 		foundEnemy = true;
 		transform.LookAt(enemyGO.transform);
@@ -47,7 +49,7 @@ function scanForEnemy()
 {
 	var x : int = 0;
 	//Debug.Log("Starting Scan");
-	while(!foundEnemy)
+	while(!foundEnemy && !disabled)
 	{
 		//Debug.Log("Scan Cycle");
 		x = 0;
@@ -74,7 +76,7 @@ function scanForEnemy()
 function OnTriggerEnter(col : Collider)
 {
 	
-	if(col.gameObject.tag == "player")
+	if(col.gameObject.tag == "player" && !disabled)
 	{
 		searchEnemy = true;
 		shootPoint.transform.LookAt(col.gameObject.transform);
@@ -97,7 +99,7 @@ function OnTriggerExit(col : Collider)
 
 function giveDamage(player : GameObject)
 {
-	while(searchEnemy)
+	while(searchEnemy && !reload)
 	{
 		var x = Random.value;
 		if(x > 0.7) damageFx(player);
@@ -114,8 +116,9 @@ function damageFx(player : GameObject)
 }
 function closeMissFx(player : GameObject)
 {
-	var rnd = Random.Range(-4.0,4.0);
+	var rnd = Random.Range(-7.0,7.0);
 	var pos : Vector3 = player.transform.position;
+	pos.x += rnd;
 	pos.z += rnd;
 	shootPoint.transform.LookAt(pos);
 	shootCannon();
@@ -128,12 +131,6 @@ function shootCannon()
 	var clone : GameObject;
 	clone = Instantiate(bulletObject,shootPoint.position,shootPoint.rotation);
 	clone.GetComponent.<Rigidbody>().AddForce(clone.transform.forward * shootSpeed);
-	if(Physics.Raycast(shootPoint.position,fwd,distanceCannon))
-	{
-		//Debug.Log("Collider Found");
-	}
-	//else Debug.Log("Empty Shot");
-	yield WaitForSeconds(3);
 	reload = false;
 }
 
@@ -209,3 +206,9 @@ function stopSounds()
 		isPlayingSound = false;
 	}
 }
+
+function disableUnit()
+{
+	disabled = true;
+}
+

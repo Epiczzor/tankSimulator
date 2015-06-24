@@ -24,7 +24,6 @@ private var reload : boolean = false;
 private var isPlayingSound : boolean = false;
 private var isPlayRSound : boolean = false;
 private var tireSmokeFxE : boolean = false;
-
 function Start () {
 }
 
@@ -69,11 +68,6 @@ function shootCannon()
 	var clone : GameObject;
 	clone = Instantiate(bulletObject,shootPoint.position,shootPoint.rotation);
 	clone.GetComponent.<Rigidbody>().AddForce(clone.transform.forward * shootSpeed);
-	if(Physics.Raycast(shootPoint.position,fwd,distanceCannon))
-	{
-		//Debug.Log("Collider Found");
-	}
-	//else Debug.Log("Empty Shot");
 	yield WaitForSeconds(3);
 	reload = false;
 }
