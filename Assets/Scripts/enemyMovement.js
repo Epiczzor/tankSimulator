@@ -114,7 +114,11 @@ function damageFx(player : GameObject)
 }
 function closeMissFx(player : GameObject)
 {
-	//shootPoint.transform.LookAt()
+	var rnd = Random.Range(-4.0,4.0);
+	var pos : Vector3 = player.transform.position;
+	pos.z += rnd;
+	shootPoint.transform.LookAt(pos);
+	shootCannon();
 }
 
 function shootCannon()
