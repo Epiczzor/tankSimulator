@@ -114,11 +114,8 @@ function damageFx(player : GameObject)
 }
 function closeMissFx(player : GameObject)
 {
-	
+	//shootPoint.transform.LookAt()
 }
-
-
-
 
 function shootCannon()
 {

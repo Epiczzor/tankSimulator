@@ -1,13 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\enemyMovement.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\playerHealth.js">
     <Files>
-      <File FileName="Assets\aimFineTune.js" Line="25" Column="5" />
-      <File FileName="Assets\Scripts\tankMovement.js" Line="154" Column="4" />
-      <File FileName="Assets\objectiveController.js" Line="20" Column="5" />
+      <File FileName="Assets\playerHealth.js" Line="27" Column="29" />
+      <File FileName="Assets\Scripts\enemyMovement.js" Line="52" Column="1" />
+      <File FileName="Assets\aimFineTune.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\tankMovement.js" Line="1" Column="1" />
+      <File FileName="Assets\objectiveController.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\bulletScript.js" Line="1" Column="1" />
       <File FileName="Assets\particleController.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\enemyMovement.js" Line="117" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
