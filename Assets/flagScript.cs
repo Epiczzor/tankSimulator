@@ -16,23 +16,16 @@ public class flagScript : MonoBehaviour {
 
 		status = false;
 		num = flags.Length;
-		fc = (flagController) flag.GetComponent(typeof(flagController));
-		fc.setTimer(flagTime);
-		sendIdentity(gameObject);
 		gc = (gameController) GetComponentInParent(typeof(gameController));
 	}
 
 	void Update () {
 	
 	}
-	void sendIdentity(GameObject go)
-	{
-		fc.storeParent(go);
-	}
 	public void startObjective()
 	{
-		Debug.Log ("Starting Objective");
-		Debug.Log (gameObject.name);
+		//Debug.Log ("Starting Objective");
+		//Debug.Log (gameObject.name);
 		status = true;
 		switch (type) {
 		case 1:
@@ -52,9 +45,12 @@ public class flagScript : MonoBehaviour {
 	void spawnType1()
 	{
 		for (int i = 0; i<num; i++) {
-			Instantiate(flag,flags[i].position,flags[i].rotation);
+			GameObject go = (GameObject) Instantiate(flag,flags[i].position,flags[i].rotation);
+			fc = (flagController) go.GetComponent(typeof(flagController));
+			fc.setTimer(flagTime);
+			fc.storeParent (gameObject);
 		}
-		Debug.Log ("Collect ALL the Flags in any order");
+		//Debug.Log ("Collect ALL the Flags in any order");
 	}
 
 	void spawnType2()
@@ -64,8 +60,15 @@ public class flagScript : MonoBehaviour {
 
 	public void flagCounter(GameObject flg)
 	{
+		Debug.Log ("Entered Counter");
 		num--;
 		Destroy (flg);
 		if (num == 0) terminateObjective();
+	}
+
+	public void DebugFn(GameObject go)
+	{
+		Debug.Log(go.name);
+		Debug.Log ("IN DEBUG FN");
 	}
 }

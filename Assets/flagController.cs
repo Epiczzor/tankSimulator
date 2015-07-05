@@ -18,8 +18,15 @@ public class flagController : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "player") {
-			if(time != 0) startTimer();
-			else fs.flagCounter(gameObject);
+			fs.DebugFn(gameObject);
+			if(time != 0) 
+				startTimer();
+			else
+			{
+				Debug.Log ("Else");
+				Debug.Log (gameObject.name);
+				fs.flagCounter(gameObject);
+			}
 		}
 	}
 
@@ -47,7 +54,10 @@ public class flagController : MonoBehaviour {
 
 	public void storeParent(GameObject go)
 	{
+		//Debug.Log ("Storing Identity");
 		parentOb = go;
+		Debug.Log (parentOb.name);
 		fs = (flagScript) parentOb.GetComponent(typeof(flagScript));
+		fs.DebugFn(gameObject);
 	}
 }

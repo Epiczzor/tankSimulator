@@ -37,8 +37,8 @@ public class gameController : MonoBehaviour {
 			eventStatus = true;
 			flagScript fs = (flagScript) flagObjects[objectiveNumber].GetComponent(typeof(flagScript));
 			fs.startObjective();
-			Debug.Log ("Calling Objective Script Name - "); 
-			Debug.Log (flagObjects[objectiveNumber].name);
+			//Debug.Log ("Calling Objective Script Name - "); 
+			//Debug.Log (flagObjects[objectiveNumber].name);
 		}
 	}
 }
