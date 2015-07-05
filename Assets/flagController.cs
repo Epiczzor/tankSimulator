@@ -3,8 +3,11 @@ using System.Collections;
 
 public class flagController : MonoBehaviour {
 	
-	public int time;
+	private int time;
 	private bool timer;
+	private GameObject parentOb;
+	private flagScript fs;
+
 	void Start () {
 		timer = false;
 	}
@@ -16,7 +19,7 @@ public class flagController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "player") {
 			if(time != 0) startTimer();
-			//else call flagCounter(this gameobject);
+			else fs.flagCounter(gameObject);
 		}
 	}
 
@@ -34,6 +37,17 @@ public class flagController : MonoBehaviour {
 			if(!timer) break;
 			yield return new WaitForSeconds(1);
 		}
-		//call flagCounter(this gameobject);
+		fs.flagCounter(gameObject);
+	}
+
+	public void setTimer(int seconds)
+	{
+		time = seconds;
+	}
+
+	public void storeParent(GameObject go)
+	{
+		parentOb = go;
+		fs = (flagScript) parentOb.GetComponent(typeof(flagScript));
 	}
 }

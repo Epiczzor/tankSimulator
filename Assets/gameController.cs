@@ -15,18 +15,17 @@ public class gameController : MonoBehaviour {
 		objectiveNumber = 0;
 		gameFn ();
 	}
-	
-	// Update is called once per frame
 	void Update () {
 	}
 
-	void triggerObjective()
+	public void triggerObjective()
 	{
 		eventStatus = false;
 		if (objectiveNumber < flagObjects.Length) {
 			objectiveNumber++;
 			gameFn ();
 		}
+		else Debug.Log ("Objectives Over");
 	}
 
 	void gameFn()
@@ -36,6 +35,10 @@ public class gameController : MonoBehaviour {
 		else
 		{
 			eventStatus = true;
-			//flagObjects[objectiveNumber]'s Start Objective Function
+			flagScript fs = (flagScript) flagObjects[objectiveNumber].GetComponent(typeof(flagScript));
+			fs.startObjective();
+			Debug.Log ("Calling Objective Script Name - "); 
+			Debug.Log (flagObjects[objectiveNumber].name);
+		}
 	}
 }

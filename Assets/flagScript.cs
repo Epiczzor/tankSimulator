@@ -6,22 +6,33 @@ public class flagScript : MonoBehaviour {
 	private bool status;
 	private int num;
 	public int type;
+	public int flagTime;
 	public GameObject flag;
 	public Transform[] flags;
+	private flagController fc;
+	private gameController gc;
 
 	void Start () {
 
 		status = false;
 		num = flags.Length;
-	
+		fc = (flagController) flag.GetComponent(typeof(flagController));
+		fc.setTimer(flagTime);
+		sendIdentity(gameObject);
+		gc = (gameController) GetComponentInParent(typeof(gameController));
 	}
 
 	void Update () {
 	
 	}
-
-	void startObjective()
+	void sendIdentity(GameObject go)
 	{
+		fc.storeParent(go);
+	}
+	public void startObjective()
+	{
+		Debug.Log ("Starting Objective");
+		Debug.Log (gameObject.name);
 		status = true;
 		switch (type) {
 		case 1:
@@ -35,6 +46,7 @@ public class flagScript : MonoBehaviour {
 	void terminateObjective()
 	{
 		status = false;
+		gc.triggerObjective();
 	}
 
 	void spawnType1()
@@ -50,10 +62,10 @@ public class flagScript : MonoBehaviour {
 
 	}
 
-	void flagCounter(GameObject flg)
+	public void flagCounter(GameObject flg)
 	{
 		num--;
 		Destroy (flg);
-		//if (num == 0) Objective complete notify gameController.cs
+		if (num == 0) terminateObjective();
 	}
 }
