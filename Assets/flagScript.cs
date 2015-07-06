@@ -11,6 +11,7 @@ public class flagScript : MonoBehaviour {
 	public Transform[] flags;
 	private flagController fc;
 	private gameController gc;
+	private int flagNum;
 
 	void Start () {
 
@@ -32,6 +33,11 @@ public class flagScript : MonoBehaviour {
 			spawnType1();
 			break;
 		case 2:
+			flagNum = 0;
+			spawnNextFlag ();
+			break;
+		default:
+			Debug.Log ("Invalid Objective Type");
 			break;
 		}
 	}
@@ -39,7 +45,7 @@ public class flagScript : MonoBehaviour {
 	void terminateObjective()
 	{
 		status = false;
-		gc.triggerObjective();
+		gc.triggerObjective(gameObject);
 	}
 
 	void spawnType1()
@@ -53,9 +59,12 @@ public class flagScript : MonoBehaviour {
 		//Debug.Log ("Collect ALL the Flags in any order");
 	}
 
-	void spawnType2()
+	void spawnNextFlag()
 	{
-
+		GameObject go = (GameObject) Instantiate(flag,flags[flagNum].position,flags[flagNum].rotation);
+		fc = (flagController) go.GetComponent(typeof(flagController));
+		fc.setTimer(flagTime);
+		fc.storeParent (gameObject);
 	}
 
 	public void flagCounter(GameObject flg)
@@ -64,6 +73,11 @@ public class flagScript : MonoBehaviour {
 		num--;
 		Destroy (flg);
 		if (num == 0) terminateObjective();
+
+		if(type == 2){
+			flagNum++;
+			spawnNextFlag();
+		}
 	}
 
 	public void DebugFn(GameObject go)

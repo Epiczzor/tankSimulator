@@ -19,8 +19,8 @@ public class flagController : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "player") {
 			fs.DebugFn(gameObject);
-			if(time != 0) 
-				startTimer();
+			if(time != 0)
+				StartCoroutine(startTimer());
 			else
 			{
 				Debug.Log ("Else");
@@ -42,6 +42,7 @@ public class flagController : MonoBehaviour {
 		timer = true;
 		for (int i = 0; i<time; i++) {
 			if(!timer) break;
+			Debug.Log (i);
 			yield return new WaitForSeconds(1);
 		}
 		fs.flagCounter(gameObject);
